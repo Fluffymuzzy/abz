@@ -21,7 +21,7 @@ model User {
   positionId                    Int             
   position                      Position             @relation(fields: [positionId], references: [id])
   photo                         String               @db.VarChar(255)
-  registration_timestamp        DateTime             @default(now()) 
+  registration_timestamp        Int              
 
   @@map("users")
 
@@ -34,3 +34,11 @@ model Position {
               
   @@map("positions")
 }
+
+model Token {
+  id                            Int                  @id @default(autoincrement())
+  token                         String               @unique
+  isUsed                        Boolean              @default(false)
+  expirationDate                DateTime
+}
+
